@@ -1,0 +1,40 @@
+<!--
+Copyright (c) 2016 The Ayla Project Authors.
+This code may only be used under the MIT style license found at http://aylaweb.github.io/LICENSE.txt
+The complete set of authors may be found at http://aylaweb.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://aylaweb.github.io/CONTRIBUTORS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../neon-animation/neon-animation-behavior.html">
+<link rel="import" href="../vip-react-behavior/vip-react-behavior.html">
+<link rel="import" href="../vip-seektime-behavior/vip-seektime-behavior.html">
+<link rel="import" href="../vip-onoff-behavior/vip-onoff-behavior.html">
+
+
+<script>
+
+    Polymer({
+        is: 'timeline-animation',
+        behaviors: [
+            Polymer.NeonAnimationBehavior,
+            Ayla.VipRuleBehavior, Ayla.VipSeekTimeBehavior,
+            Ayla.VipOnOffBehavior],
+        configure: function (config) {
+            var node = config.node;
+            this._effect = new KeyframeEffect(node, [], config.timing);
+            this._effect.onsample = function (timeFraction, target, animation) {
+                if (timeFraction !== null) {
+                    node.__tick();
+                            
+                }
+            };
+            this.id = config.id;
+            this.seekTimeSource = config.seekTimeSource;
+            this.onOffSource = config.onOffSource;
+            return this._effect;
+        }
+
+    });
+
+</script>
