@@ -25,8 +25,7 @@ The complete set of contributors may be found at http://aylaweb.github.io/CONTRI
             this._effect = new KeyframeEffect(node, [], config.timing);
             this._effect.onsample = function (timeFraction, target, animation) {
                 if (timeFraction !== null) {
-                    node.__tick();
-                            
+                    node.__tick();                         
                 }
             };
             this.id = config.id;
